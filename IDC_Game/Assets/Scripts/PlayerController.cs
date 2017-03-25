@@ -29,10 +29,10 @@ public class PlayerController : MonoBehaviour {
 
     void Update()
     {
-        if Input.GetButton("Fire1") && Time.time > nextFire)
+        if (Input.GetButton("Fire1") && Time.time > nextFire)
         {
             nextFire = Time.time + fireRate;
-            Instantiate(shot, shotSpawn);
+            Instantiate(shot, shotSpawn.position, shotSpawn.rotation);
         }
     }
 
@@ -50,6 +50,6 @@ public class PlayerController : MonoBehaviour {
                 Mathf.Clamp (rb.position.x, boundary.xMin, boundary.xMax),
                 Mathf.Clamp (rb.position.y, boundary.yMin, boundary.yMax)
             );
-        
+
     }
 }
