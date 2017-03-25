@@ -10,14 +10,30 @@ public class Boundary
 
 public class PlayerController : MonoBehaviour {
 
+    //variables for player ship
     public float speed;
     public Boundary boundary;
-
     private Rigidbody2D rb;
+
+    //Fire weapon variables
+    public GameObject shot;
+    public Transform shotSpawn;
+    public float fireRate;
+
+    private float nextFire;
 
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+    }
+
+    void Update()
+    {
+        if Input.GetButton("Fire1") && Time.time > nextFire)
+        {
+            nextFire = Time.time + fireRate;
+            Instantiate(shot, shotSpawn);
+        }
     }
 
     void FixedUpdate()
