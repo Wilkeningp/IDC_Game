@@ -7,6 +7,7 @@ public class EnemyHealth : MonoBehaviour {
     private GameObject gm;
     private Dimension orginal;
     public int enemyHealth;
+    public int scoreValue;
 
     void Start()
     {
@@ -23,6 +24,8 @@ public class EnemyHealth : MonoBehaviour {
                 enemyHealth--;
                 if (enemyHealth <= 0)
                 {
+                    gm.GetComponent<GameManager>().EnemyKilled();
+                    gm.GetComponent<GameManager>().AddScore(scoreValue);
                     DestroyObject(gameObject);
                 }
                 DestroyObject(other.gameObject);

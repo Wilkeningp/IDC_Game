@@ -102,12 +102,18 @@ public class PlayerController : MonoBehaviour {
         if (other.tag == "enemy_bullet")
         {
             health--;
+            gm.GetComponent<GameManager>().UpdateHealthText();
             if (health == 0)
             {
                 DestroyObject(gameObject);
-                //TODO: Game Over
+                gm.GetComponent<GameManager>().GameOver();
             }
             DestroyObject(other.gameObject);
         }
+    }
+
+    public int getHealth()
+    {
+        return health;
     }
 }
