@@ -1,6 +1,11 @@
 fileFormatVersion: 2
+<<<<<<< Updated upstream:IDC_Game/Assets/Sprites/Rocket.piskel.meta
 guid: 80ddd52437bf3ce44ab70e617d340aea
 timeCreated: 1490541750
+=======
+guid: 672e2c0bf90fe479f8e243942692178f
+timeCreated: 1490520289
+>>>>>>> Stashed changes:IDC_Game/Assets/Sprites/Rocket.piskel.meta
 licenseType: Free
 DefaultImporter:
   userData: 

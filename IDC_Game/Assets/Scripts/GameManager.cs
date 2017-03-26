@@ -37,6 +37,7 @@ public class GameManager : MonoBehaviour {
         activeEnemies = 0;
         gameOver = false;
         restart = false;
+        spawnWait = 10;
         gameOverText.text = "";
         restartText.text = "";
         score = 0;
@@ -58,6 +59,7 @@ public class GameManager : MonoBehaviour {
 
     IEnumerator SpawnWaves()
     {
+        
         yield return new WaitForSeconds(startWait);
         while (true)
         {
@@ -80,6 +82,7 @@ public class GameManager : MonoBehaviour {
                 break;
             }
         }
+
     }
 
     public void EnemyKilled()
