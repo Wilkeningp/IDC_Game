@@ -9,15 +9,35 @@ public class GameManager : MonoBehaviour {
     public float startWait;
     private List<GameObject>[] encounters;
 
+    public GameObject enemy1Light;
+    public GameObject enemy2Light;
+    public GameObject enemy3Light;
 
+    public GameObject enemy1Dark;
+    public GameObject enemy2Dark;
+    public GameObject enemy3Dark;
 
-	// Use this for initialization
-	void Start () {
-		
+    private Dimension current;
+
+    public Dimension getDimension()
+    {
+        return current;
+    }
+
+    public void setDimention(Dimension d)
+    {
+        current = d;
+    }
+
+    // Use this for initialization
+    void Start () {
+        
 	}
 	
 	// Update is called once per frame
 	void Update () {
 		
-	}
+    }
+
+    
 }

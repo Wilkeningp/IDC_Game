@@ -16,6 +16,8 @@ public enum Dimension
 
 public class PlayerController : MonoBehaviour {
 
+    private GameObject gm;
+
     //variables for player ship
     public float speed;
     public Boundary boundary;
@@ -42,6 +44,8 @@ public class PlayerController : MonoBehaviour {
         current = Dimension.Light;
         rb = GetComponent<Rigidbody2D>();
         rend = GetComponent<SpriteRenderer>();
+        gm = GameObject.Find("GameManager");
+        gm.GetComponent<GameManager>().setDimention(current);
     }
 
     void Update()
@@ -50,7 +54,7 @@ public class PlayerController : MonoBehaviour {
         {
             nextFire = Time.time + fireRate;
             bullet = Instantiate(shot, shotSpawn.position, shotSpawn.rotation);
-            bullet.GetComponent<PlayerBullet>().original = current;
+            bullet.GetComponent<PlayerBullet>().setDimension(current);
         }
         if (Input.GetButton("Swap") && Time.time > nextSwap)
         {
@@ -63,6 +67,7 @@ public class PlayerController : MonoBehaviour {
             {
                 current = Dimension.Light;
             }
+            gm.GetComponent<GameManager>().setDimention(current);
         }
 
         if (current == Dimension.Light)

@@ -4,21 +4,29 @@ using UnityEngine;
 
 public class EnemyHealth : MonoBehaviour {
 
-    public Boundary boundary;
-
+    private GameObject gm;
+    private Dimension orginal;
     public int enemyHealth;
 
+    void Start()
+    {
+        gm = GameObject.Find("GameManager");
+    }
 
     void OnTriggerEnter(Collider other)
     {
         if (other.tag == "player_bullet")
         {
-            enemyHealth--;
-            if (enemyHealth <= 0)
+            Dimension current = gm.GetComponent<GameManager>().getDimension();
+            if (current == orginal)
             {
-                DestroyObject(gameObject);
+                enemyHealth--;
+                if (enemyHealth <= 0)
+                {
+                    DestroyObject(gameObject);
+                }
+                DestroyObject(other.gameObject);
             }
-            DestroyObject(other.gameObject);
         }
     }
 }
