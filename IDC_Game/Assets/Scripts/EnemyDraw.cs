@@ -5,7 +5,7 @@ using UnityEngine;
 public class EnemyDraw : MonoBehaviour {
 
     private GameObject gm;
-    public Dimension orginal;
+    public Dimension original;
     public Color hidden;
     public Color revealed;
     private SpriteRenderer rend;
@@ -20,7 +20,7 @@ public class EnemyDraw : MonoBehaviour {
 	void Update () {
         Dimension current = gm.GetComponent<GameManager>().getDimension();
         
-        if (current == orginal)
+        if (current == original)
         {
             rend.color = revealed;
         }
@@ -29,4 +29,9 @@ public class EnemyDraw : MonoBehaviour {
             rend.color = hidden;
         }
 	}
+
+    public Dimension getDimension()
+    {
+        return original;
+    }
 }

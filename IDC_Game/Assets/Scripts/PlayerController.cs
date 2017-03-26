@@ -39,9 +39,15 @@ public class PlayerController : MonoBehaviour {
     private float nextFire;
     private GameObject bullet;
 
+    private bool immune;
+    public float immunityTime;
+    private float endImmune;
+    
+
     void Start()
     {
         current = Dimension.Light;
+        immune = false;
         rb = GetComponent<Rigidbody2D>();
         rend = GetComponent<SpriteRenderer>();
         gm = GameObject.Find("GameManager");
@@ -78,6 +84,16 @@ public class PlayerController : MonoBehaviour {
         {
             rend.color = darkWorld;
         }
+
+        if (immune)
+        {
+            Color temp = rend.color;
+            temp.a = 0.5f;
+            rend.color = temp;
+        }
+
+        CheckImmunity();
+
     }
 
     void FixedUpdate()
@@ -101,19 +117,38 @@ public class PlayerController : MonoBehaviour {
     {
         if (other.tag == "enemy_bullet")
         {
-            health--;
-            gm.GetComponent<GameManager>().UpdateHealthText();
-            if (health == 0)
+            Dimension bullet = other.gameObject.GetComponent<EnemyBullet>().getDimension();
+            if (bullet == current)
             {
-                DestroyObject(gameObject);
-                gm.GetComponent<GameManager>().GameOver();
+                if (immune == false)
+                {
+                    health--;
+                    gm.GetComponent<GameManager>().UpdateHealthText();
+                    if (health == 0)
+                    {
+                        DestroyObject(gameObject);
+                        gm.GetComponent<GameManager>().GameOver();
+                    }
+                    endImmune = Time.time + immunityTime;
+                    DestroyObject(other.gameObject);
+                }
             }
-            DestroyObject(other.gameObject);
         }
     }
 
     public int getHealth()
     {
         return health;
+    }
+
+    void CheckImmunity()
+    {
+        if (Time.time >= endImmune)
+        {
+            immune = false;
+            Color temp = rend.color;
+            temp.a = 1.0f;
+            rend.color = temp;
+        }
     }
 }

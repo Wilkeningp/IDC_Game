@@ -21,7 +21,7 @@ public class EnemyMovement : MonoBehaviour {
     }
 	
 	
-	void FixedUpdate () {
+	void Update () {
         while (hasFired == true)
         {
             if (moving == false)
@@ -35,6 +35,7 @@ public class EnemyMovement : MonoBehaviour {
                 rb.position = currentMP.transform.position;
                 moving = false;
                 hasFired = false;
+                gameObject.GetComponent<EnemyAttack_Basic>().Attack();
             }
             else
             {

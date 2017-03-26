@@ -12,14 +12,15 @@ public class EnemyHealth : MonoBehaviour {
     void Start()
     {
         gm = GameObject.Find("GameManager");
+        orginal = GetComponent<EnemyDraw>().getDimension();
     }
 
     void OnTriggerEnter(Collider other)
     {
         if (other.tag == "player_bullet")
         {
-            Dimension current = gm.GetComponent<GameManager>().getDimension();
-            if (current == orginal)
+            Dimension bullet = other.gameObject.GetComponent<PlayerBullet>().getDimension();
+            if (bullet == orginal)
             {
                 enemyHealth--;
                 if (enemyHealth <= 0)

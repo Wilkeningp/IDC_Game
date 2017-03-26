@@ -4,7 +4,10 @@ using UnityEngine;
 
 public class EnemyBullet : MonoBehaviour {
 
+    public enum BulletType { normal, boomerang, blob };
+
     public float speed;
+    public BulletType type;
     private Dimension original;
     private Rigidbody2D rb;
     private GameObject gm;
@@ -13,19 +16,48 @@ public class EnemyBullet : MonoBehaviour {
     public Color hidden;
     public Color revealed;
 
-	// Use this for initialization
-	void Start () {
+    // Use this for initialization
+    void Start()
+    {
         gm = GameObject.Find("GameManager");
         rend = GetComponent<SpriteRenderer>();
         rb = GetComponent<Rigidbody2D>();
 
-        rb.velocity = transform.forward * speed;
-	}
+        if (type == BulletType.normal)
+        {
+            rb.velocity = transform.forward * speed;
+        }
+        if (type == BulletType.boomerang)
+        {
+            //TODO
+        }
+        if (type == BulletType.blob)
+        {
+            //TODO
+        }
+    }
 	
 	// Update is called once per frame
 	void Update () {
-		
+        Dimension current = gm.GetComponent<GameManager>().getDimension();
+        if (current == original)
+        {
+            rend.color = revealed;
+        }
+        else
+        {
+            rend.color = hidden;
+        }
+
 	}
 
+    public void setDimension (Dimension d)
+    {
+        original = d;
+    }
 
+    public Dimension getDimension()
+    {
+        return original;
+    }
 }

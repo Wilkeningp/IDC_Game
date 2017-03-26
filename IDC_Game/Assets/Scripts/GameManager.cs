@@ -8,6 +8,7 @@ public class GameManager : MonoBehaviour {
     public Vector2 spawnValues;
     public float spawnWait;
     public float startWait;
+    public float waveWait;
     public GameObject[] enemies;
 
     public GUIText scoreText;
@@ -67,10 +68,10 @@ public class GameManager : MonoBehaviour {
                 Vector2 spawnPoint = new Vector2(Random.Range(-spawnValues.x, spawnValues.x), spawnValues.y);
                 Quaternion spawnRotation = Quaternion.identity;
                 Instantiate(enemy, spawnPoint, spawnRotation);
-                activeEnemies++;
+                //activeEnemies++;
                 yield return new WaitForSeconds(spawnWait);
             }
-            yield return new WaitUntil(() => activeEnemies <= 0);
+            yield return new WaitForSeconds(waveWait);
 
             if (gameOver)
             {
@@ -83,7 +84,7 @@ public class GameManager : MonoBehaviour {
 
     public void EnemyKilled()
     {
-        activeEnemies--;
+        //activeEnemies--;
     }
 
     public void AddScore(int addedScore)

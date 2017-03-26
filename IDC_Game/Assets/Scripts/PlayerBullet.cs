@@ -41,4 +41,9 @@ public class PlayerBullet : MonoBehaviour {
     {
         original = d;
     }
+
+    public Dimension getDimension()
+    {
+        return original;
+    }
 }
