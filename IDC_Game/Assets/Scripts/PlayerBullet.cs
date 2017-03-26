@@ -5,6 +5,7 @@ using UnityEngine;
 public class PlayerBullet : MonoBehaviour {
 
     public float speed;
+    public Dimension original;
     private Rigidbody2D rb;
 
     // Use this for initialization

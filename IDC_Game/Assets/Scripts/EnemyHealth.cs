@@ -4,14 +4,17 @@ using UnityEngine;
 
 public class EnemyHealth : MonoBehaviour {
 
+    public Boundary boundary;
+
     public int enemyHealth;
+
 
     void OnTriggerEnter(Collider other)
     {
         if (other.tag == "player_bullet")
         {
             enemyHealth--;
-            if (enemyHealth == 0)
+            if (enemyHealth <= 0)
             {
                 DestroyObject(gameObject);
             }
