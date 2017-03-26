@@ -14,6 +14,7 @@ public class PlayerController : MonoBehaviour {
     public float speed;
     public Boundary boundary;
     private Rigidbody2D rb;
+    public int health;
 
     //Fire weapon variables
     public GameObject shot;
@@ -51,5 +52,19 @@ public class PlayerController : MonoBehaviour {
                 Mathf.Clamp (rb.position.y, boundary.yMin, boundary.yMax)
             );
 
+    }
+
+    void OnTriggerEnter(Collider other)
+    {
+        if (other.tag == "enemy_bullet")
+        {
+            health--;
+            if (health == 0)
+            {
+                DestroyObject(gameObject);
+                //TODO: Game Over
+            }
+            DestroyObject(other.gameObject);
+        }
     }
 }
