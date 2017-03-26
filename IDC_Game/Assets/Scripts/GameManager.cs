@@ -43,7 +43,7 @@ public class GameManager : MonoBehaviour {
         score = 0;
         UpdateScoreText();
         UpdateHealthText();
-        StartCoroutine(SpawnWaves());
+        //StartCoroutine(SpawnWaves());
 	}
 	
     void Update()
@@ -57,6 +57,7 @@ public class GameManager : MonoBehaviour {
         }
     }
 
+    /*
     IEnumerator SpawnWaves()
     {
         
@@ -84,6 +85,7 @@ public class GameManager : MonoBehaviour {
         }
 
     }
+    */
 
     public void EnemyKilled()
     {
