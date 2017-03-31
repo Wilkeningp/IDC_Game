@@ -21,7 +21,7 @@ public class EnemyMovement : MonoBehaviour {
     }
 	
 	
-	void Update () {
+	public void UpdateMovement () {
         while (hasFired == true)
         {
             if (moving == false)

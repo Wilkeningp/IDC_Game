@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour {
 
-    public Vector2 spawnValues;
+    public Vector2 spawnRange;
     public float spawnWait;
     public float startWait;
     public float waveWait;
@@ -21,6 +21,12 @@ public class GameManager : MonoBehaviour {
     private bool gameOver;
     private bool restart;
     private int score;
+
+    private float nextSpawn;
+    private float nextWave;
+    private bool waveSpawning;
+    private int encountSize;
+
 
     public Dimension getDimension()
     {
@@ -41,6 +47,9 @@ public class GameManager : MonoBehaviour {
         gameOverText.text = "";
         restartText.text = "";
         score = 0;
+        nextWave = Time.time + startWait;
+        nextSpawn = Time.time;
+        waveSpawning = false;
         UpdateScoreText();
         UpdateHealthText();
         //StartCoroutine(SpawnWaves());
@@ -48,12 +57,49 @@ public class GameManager : MonoBehaviour {
 	
     void Update()
     {
-        if (restart)
+        //MoveEnemies();
+        if (gameOver)
         {
-            if(Input.GetKeyDown (KeyCode.R))
+            restartText.text = restartText.text = "Press R to Restart";
+            if (Input.GetKeyDown(KeyCode.R))
             {
                 SceneManager.LoadScene(SceneManager.GetActiveScene().name);
             }
+        }
+        else
+        {
+            //SpawnWaves();
+        }
+    }
+
+    void SpawnWaves()
+    {
+        if (Time.time > nextWave && activeEnemies == 0)
+        {
+            encountSize = (int)Random.Range(4, 9);
+            waveSpawning = true;
+        }
+        if (Time.time > nextSpawn && waveSpawning == true)
+        {
+            nextSpawn = Time.time + spawnWait;
+            GameObject enemy = enemies[Random.Range(0, enemies.Length)];
+            Vector2 spawnPoint = new Vector2(Random.Range(-spawnRange.x, spawnRange.x), spawnRange.y);
+            Quaternion spawnRotation = Quaternion.identity;
+            Instantiate(enemy, spawnPoint, spawnRotation);
+            activeEnemies++;
+            if (activeEnemies == encountSize)
+            {
+                waveSpawning = false;
+            }
+        }
+    }
+
+    public void EnemyKilled()
+    {
+        activeEnemies--;
+        if (activeEnemies == 0)
+        {
+            nextWave = Time.time + waveWait;
         }
     }
 
@@ -87,9 +133,13 @@ public class GameManager : MonoBehaviour {
     }
     */
 
-    public void EnemyKilled()
+    private void MoveEnemies ()
     {
-        //activeEnemies--;
+        GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
+        foreach ( GameObject enemy in enemies)
+        {
+            enemy.GetComponent<EnemyMovement>().UpdateMovement();
+        }
     }
 
     public void AddScore(int addedScore)
