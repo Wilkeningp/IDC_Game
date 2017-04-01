@@ -57,7 +57,7 @@ public class GameManager : MonoBehaviour {
 	
     void Update()
     {
-        //MoveEnemies();
+        MoveEnemies();
         if (gameOver)
         {
             restartText.text = restartText.text = "Press R to Restart";

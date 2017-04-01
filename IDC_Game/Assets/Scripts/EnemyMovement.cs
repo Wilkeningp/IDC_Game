@@ -7,7 +7,8 @@ public class EnemyMovement : MonoBehaviour {
     public float speed;
 
     private GameObject[] movePoints;
-    private GameObject currentMP;
+    public GameObject currentMP;
+    public float proxyRange;
     private bool moving;
     private bool hasFired;
     private Rigidbody2D rb;
@@ -22,25 +23,26 @@ public class EnemyMovement : MonoBehaviour {
 	
 	
 	public void UpdateMovement () {
-        while (hasFired == true)
+        if (hasFired == true)
         {
             if (moving == false)
             {
                 currentMP = movePoints[(int)Random.Range(0, movePoints.Length)];
                 moving = true;
             }
-            float distance = Vector2.Distance(gameObject.transform.position, currentMP.transform.position);
-            if (distance <= speed)
+            Vector2 heading = currentMP.transform.position - gameObject.transform.position;
+            //float distance = Vector2.Distance(gameObject.transform.position, currentMP.transform.position);
+            if (heading.sqrMagnitude < (proxyRange * proxyRange))
             {
-                rb.position = currentMP.transform.position;
+                //rb.position = currentMP.transform.position;
+                rb.velocity = new Vector2(0.0f, 0.0f);
                 moving = false;
-                hasFired = false;
-                gameObject.GetComponent<EnemyAttack_Basic>().Attack();
+                //hasFired = false;
+                //gameObject.GetComponent<EnemyAttack_Basic>().Attack();
             }
             else
             {
-                Vector2 direction = gameObject.transform.position - currentMP.transform.position;
-                rb.velocity = direction * speed;
+                rb.velocity = heading.normalized * speed;
             }
         }
 	}
