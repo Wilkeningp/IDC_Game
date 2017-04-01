@@ -37,8 +37,8 @@ public class EnemyMovement : MonoBehaviour {
                 //rb.position = currentMP.transform.position;
                 rb.velocity = new Vector2(0.0f, 0.0f);
                 moving = false;
-                //hasFired = false;
-                //gameObject.GetComponent<EnemyAttack_Basic>().Attack();
+                hasFired = false;
+                gameObject.GetComponent<EnemyAttack_Basic>().Attack();
             }
             else
             {

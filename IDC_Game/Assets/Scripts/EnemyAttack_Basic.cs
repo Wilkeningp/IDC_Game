@@ -33,7 +33,7 @@ public class EnemyAttack_Basic : MonoBehaviour {
 	void Update () {
 		if (canAttack == true)
         {
-            while (currentShotCount > 0)
+            if (currentShotCount > 0)
             {
                 if (Time.time > nextFire)
                 {

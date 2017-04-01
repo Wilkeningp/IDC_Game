@@ -25,7 +25,8 @@ public class EnemyBullet : MonoBehaviour {
 
         if (type == BulletType.normal)
         {
-            rb.velocity = transform.forward * speed;
+            Vector2 direction = new Vector2(0, -1);
+            rb.velocity = direction * speed;
         }
         if (type == BulletType.boomerang)
         {
