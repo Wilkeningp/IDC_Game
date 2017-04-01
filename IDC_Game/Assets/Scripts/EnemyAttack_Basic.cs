@@ -47,13 +47,16 @@ public class EnemyAttack_Basic : MonoBehaviour {
                     }
                 }
             }
-            canAttack = false;
-            currentShotCount = maxNumOfShots;
-            if(pattern == AttackPattern.sweep)
+            else
             {
-                gameObject.transform.rotation = Quaternion.identity;
+                canAttack = false;
+                currentShotCount = maxNumOfShots;
+                if (pattern == AttackPattern.sweep)
+                {
+                    gameObject.transform.rotation = Quaternion.identity;
+                }
+                gameObject.GetComponent<EnemyMovement>().Fired();
             }
-            gameObject.GetComponent<EnemyMovement>().Fired();
         }
 	}
 
