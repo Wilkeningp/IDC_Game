@@ -113,9 +113,10 @@ public class PlayerController : MonoBehaviour {
 
     }
 
-    void OnTriggerEnter(Collider other)
+    void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.tag == "enemy_bullet")
+        Debug.Log("Player trigger activated");
+        if (other.CompareTag("enemy_bullet") )
         {
             Dimension bullet = other.gameObject.GetComponent<EnemyBullet>().getDimension();
             if (bullet == current)

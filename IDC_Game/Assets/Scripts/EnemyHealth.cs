@@ -15,9 +15,10 @@ public class EnemyHealth : MonoBehaviour {
         orginal = GetComponent<EnemyDraw>().getDimension();
     }
 
-    void OnTriggerEnter(Collider other)
+    void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.tag == "player_bullet")
+        Debug.Log("Enemy tigger Activated");
+        if (other.gameObject.tag == "player_bullet" )
         {
             Dimension bullet = other.gameObject.GetComponent<PlayerBullet>().getDimension();
             if (bullet == orginal)
