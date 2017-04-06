@@ -17,6 +17,7 @@ public class EnemyMovement : MonoBehaviour {
 	void Start () {
         movePoints = GameObject.FindGameObjectsWithTag("Move Point");
         rb = GetComponent<Rigidbody2D>();
+        //currentMP = movePoints[(int)Random.Range(0, movePoints.Length)];
         moving = false;
         hasFired = true;
     }

@@ -43,7 +43,6 @@ public class GameManager : MonoBehaviour {
         activeEnemies = 0;
         gameOver = false;
         restart = false;
-        spawnWait = 10;
         gameOverText.text = "";
         restartText.text = "";
         score = 0;
@@ -68,7 +67,7 @@ public class GameManager : MonoBehaviour {
         }
         else
         {
-            //SpawnWaves();
+            SpawnWaves();
         }
     }
 
